@@ -1,25 +1,32 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { css } from '@emotion/core'
 import { Home } from './home'
 
+import { PieChartPage } from './components/graphs/pieChartPage.jsx'
+import { ButtonPage } from './components/buttons/buttonPage.jsx'
+import Header from './components/header.jsx'
+
 function AppRouter () {
+  const [convertRoman, setConvertRoman] = useState(true)
+  const [isI18nEnabled, setIsI18nEnabled] = useState(window.location.search.includes('i18n=true'))
+
   return (
     <Router>
       <div css={layoutStyle}>
-        <nav css={navStyle}>
-          <ul >
-            <li>
-              <Link to='/'>Home</Link>
-            </li>
-            <li>
-              <Link to='/another'>Another route</Link>
-            </li>
-          </ul>
-        </nav>
+        <Header convertRoman={convertRoman} isI18nEnabled={isI18nEnabled} setConvertRoman={setConvertRoman} setIsI18nEnabled={setIsI18nEnabled} />
         <div className='main-content' css={contentStyle}>
-          <Route component={Home} exact path='/' />
-          <Route component={() => (<div>Content for /another route</div>)} exact path='/another' />
+          <Switch>
+            <Route exact path='/'>
+              <Home convertRoman={convertRoman} />
+            </Route>
+            <Route exact path='/graphs'>
+              <PieChartPage />
+            </Route>
+            <Route exact path='/button'>
+              <ButtonPage convertRoman={convertRoman} />
+            </Route>
+          </Switch>
         </div>
       </div>
     </Router>
@@ -29,25 +36,15 @@ function AppRouter () {
 export default AppRouter
 
 const layoutStyle = css`
-    display: grid;
-    grid-row-gap: 24px;
-    padding: 8px;
+    display: flex;
+    flex-direction: column;
+
+    .main-content {
+      background-color: white;
+    }
 `
-
-const navStyle = css`
-  grid-row: 1;
-
-  & > ul {
-      display: flex;
-      flex-direction: row;
-      list-style-type: none;
-  }
-  
-  & > ul > li:not(:first-of-type) {
-    margin-left: 16px;
-  }
-`
-
 const contentStyle = css`
-  grid-row: 2;
+  display: flex;
+  justify-content:center;
+  padding: 10px;
 `
