@@ -1,13 +1,21 @@
 # Feature Completed and Notes
 
 All CSS is custom and written for this assignment with the exception of the toggle button and graphs.
+
 Created a custom table that allows user to easily see, edit, delete, and add transaction data.
+
 This includes the creation of several endpoints with GraphQL and MongoDB as the webserver was not set up to edit or delete transactions.
+
 Created a graph page that demonstrates processing particular data from the database and displaying it
+
 Created a toggle switch that will switch all visible numbers on the page to Roman numerals, including numbers found with strings of text in paragraphs. (Will also change the colors of the graphs)
+
 Created a seed script in the web server that will add some fun data to the database via post install
+
 Added an i18n setting via url if you add '?i18n=true' to any webpage url, it will translate all text to Korean gibberish.
+
 Added better navigation and styling, including a custom button and header and custom form for editing and accompanying animations.
+
 A bonus fun route to be able to see some of the features a little better like the button
 
 # Divvy Homework Assignment
